@@ -48,10 +48,10 @@ fun validateInputs(returnListInputs: MutableList<String>): MutableList<String> {
     var positionsList = specialPositions.drop(1).map { it.toString().toInt() }
 
     while (positionsList.any { it >= limit } || specialPositions.isNullOrBlank()) {
-        if (specialPositions.isNullOrBlank()) {
-            println("Entrada vazia não é permitida. Por favor, insira as posições especiais.")
-        } else {
+        if (positionsList.any { it >= limit }) {
             println("Uma ou mais posições especiais excedem o limite. Por favor, insira valores abaixo de $limit.")
+        } else if (specialPositions.isBlank()) {
+            println("Entrada vazia não é permitida. Por favor, insira as posições especiais.")
         }
         println("Por favor, digite novamente as posições especiais:")
         specialPositions = readlnOrNull() ?: ""
